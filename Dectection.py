@@ -1,8 +1,9 @@
 import cv2
 import numpy as np
+from ocr import extract_plate_no
 
 # Read input image
-img = cv2.imread("Car_Image_1.jpg")
+img = cv2.imread("BH-SERIES-NUMBER-PLATES-FEATURED-IMAGE.jpg")
 
 # convert input image to grayscale  
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -24,7 +25,8 @@ for (x,y,w,h) in plates:
    
    # save number plate detected
    cv2.imwrite('Numberplate.jpg', gray_plates)
-   cv2.imshow('Number Plate', gray_plates)
+   plate_no = extract_plate_no('Numberplate.jpg')
+   print(f"Plate No is {plate_no}")
    cv2.imshow('Number Plate Image', img)
    cv2.waitKey(0)
 cv2.destroyAllWindows()
